@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #ifndef FILE_HANDLING_H
 #define FILE_HANDLING_H
+#define NO_OF_CHAR_PER_LINE 5000
 #include "defines.h"
 
 

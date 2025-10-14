@@ -80,7 +80,7 @@ gboolean toggle_dark_theme(GtkWidget *window, GdkEventKey *event) {
 gboolean highlight_key_pressed(GtkWidget * window, GdkEventKey * event, gpointer user_data){
     if((event->state & GDK_CONTROL_MASK) && (event->keyval == GDK_KEY_H || event->keyval == GDK_KEY_h)){
         show_text_highlighting = !show_text_highlighting;
-        if(show_text_highlighting){
+        if(show_text_highlighting && !FILE_HAS_LONG_LINES){
             set_file_language();
         }else{
             unset_file_language();
@@ -160,7 +160,7 @@ char * get_css_file_path() {
     exe_path[len] = '\0';
     char exe_copy[PATH_MAX];
     strncpy(exe_copy, exe_path, PATH_MAX);
-    snprintf(css_path, sizeof(css_path), "%s/Style.css", dirname(exe_copy));
+    snprintf(css_path, sizeof(css_path), "%s/support/Nilgiri/Style.css", dirname(exe_copy));
 #endif
 
     return css_path;

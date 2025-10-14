@@ -25,6 +25,7 @@ gboolean IS_DARK_THEME = FALSE;
 gboolean buffer_has_changed = FALSE;
 gboolean quit_program_after_save = FALSE;
 gboolean show_text_highlighting = TRUE;
+gboolean FILE_HAS_LONG_LINES = FALSE;
 char * CSS_FILE_PATH = NULL;
 
 

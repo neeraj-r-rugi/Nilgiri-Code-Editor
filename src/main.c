@@ -371,7 +371,12 @@ static void activate(GtkApplication * app, gpointer user_data)
     buffer = gtk_source_buffer_new(NULL);
     text_area = GTK_SOURCE_VIEW(gtk_source_view_new_with_buffer(buffer));
     gtk_source_view_set_show_line_numbers(text_area, TRUE); // Adds Line Number to Text Editor
-    gtk_source_view_set_auto_indent(text_area, TRUE);    // Adds Auto Indent in the text Editor
+    if(!FILE_HAS_LONG_LINES){
+        gtk_source_view_set_auto_indent(text_area, TRUE);    // Adds Auto Indent in the text Editor
+        gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW(text_area), GTK_WRAP_WORD_CHAR);
+        gtk_source_view_set_highlight_current_line(text_area, FALSE);
+    }
+    
 
     // Text Data for Search and Replace
     SearchData *data = g_new0(SearchData, 1);

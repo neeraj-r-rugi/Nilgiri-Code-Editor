@@ -75,6 +75,7 @@ extern gboolean IS_DARK_THEME;//Toggles weather Dark Theme Should be enabled or 
 extern gboolean buffer_has_changed;
 extern gboolean quit_program_after_save;
 extern gboolean show_text_highlighting;
+extern gboolean FILE_HAS_LONG_LINES;
 
 
 //Functions

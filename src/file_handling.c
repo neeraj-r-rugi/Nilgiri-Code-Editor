@@ -21,25 +21,40 @@ void load_file_into_buffer()
     gchar *content = NULL;
     gsize length = 0;
     GError *error = NULL;
-    if (access(file_path, F_OK) != 0)
-    {
+    
+    if (access(file_path, F_OK) != 0) {
         FILE *fp = fopen(file_path, "w");
         fclose(fp);
     }
-
-    // Read the file content
-    if (!g_file_get_contents(file_path, &content, &length, &error))
-    {
+    
+    if (!g_file_get_contents(file_path, &content, &length, &error)) {
         g_printerr("Error reading file: %s\n", error->message);
         g_error_free(error);
         return;
     }
-
-    set_file_language();
-
-    // Set the text in the source buffer
+    
+    // Checking for extremely long lines
+    gchar *line_start = content;
+    gchar *line_end;
+    
+    while ((line_end = strchr(line_start, '\n')) != NULL && !FILE_HAS_LONG_LINES) {//No need to check other line if atleast one line is long.
+        if (line_end - line_start > NO_OF_CHAR_PER_LINE) { // 5k chars per line
+            FILE_HAS_LONG_LINES = TRUE;
+            break;
+        }
+        line_start = line_end + 1;
+    }
+    
     gtk_text_buffer_set_text(GTK_TEXT_BUFFER(buffer), content, length);
-
+    
+    // Only enable syntax highlighting for files without extremely long lines
+    if (!FILE_HAS_LONG_LINES) {
+        set_file_language();
+    }else{
+        g_print("The Current File is too big for syntax highlighting. Syntax Highlighting \
+            Disabled.\n");
+    }
+    
     g_free(content);
 }
 
