@@ -67,7 +67,7 @@ static int on_command_line(GApplication *app, GApplicationCommandLine *command_l
 }
 
 // Definitions of search and replace elements
-static GtkTextTag * ensure_search_tag(GtkTextBuffer *buffer)
+GtkTextTag * ensure_search_tag(GtkTextBuffer *buffer)
 {
     GtkTextTagTable *tag_table = gtk_text_buffer_get_tag_table(buffer);
     GtkTextTag *tag = gtk_text_tag_table_lookup(tag_table, "search-tag");
@@ -90,29 +90,9 @@ void clear_highlights(GtkSourceBuffer *buffer)
 
 static void on_search_changed(GtkEntry *entry, gpointer user_data)
 {
-    SearchData *data = user_data;
-    GtkSourceBuffer *buffer = data->buffer;
-    const gchar *search_text = gtk_entry_get_text(data->search_entry);
-
-    clear_highlights(buffer);
-
-    if (strlen(search_text) == 0)
-        return;
-
-    GtkTextIter start, match_start, match_end;
-    gtk_text_buffer_get_start_iter(GTK_TEXT_BUFFER(buffer), &start);
-
-    GtkTextTag *tag = ensure_search_tag(GTK_TEXT_BUFFER(buffer));
-
-    while (gtk_text_iter_forward_search(&start, search_text, GTK_TEXT_SEARCH_CASE_INSENSITIVE,
-                                        &match_start, &match_end, NULL))
-    {
-        gtk_text_buffer_apply_tag(GTK_TEXT_BUFFER(buffer), tag, &match_start, &match_end);
-        start = match_end;
-    }
-
-    // Reset match state
-    gtk_text_buffer_get_start_iter(GTK_TEXT_BUFFER(buffer), &data->last_match_end);
+    SearchData *data = (SearchData *)user_data;
+    start_incremental_search(data);
+    gtk_text_buffer_get_start_iter(GTK_TEXT_BUFFER(data->buffer), &data->last_match_end);
     data->has_match = FALSE;
 }
 

@@ -52,6 +52,17 @@ typedef struct{
     GtkWidget * cancel;
 }SaveAtQuitButtons;
 
+
+typedef struct {
+    GtkSourceBuffer *buffer;
+    GtkEntry        *entry;        /* the search_entry widget we attached to */
+    gchar           *search_text;  /* duplicated copy */
+    GtkTextIter      iter;         /* current search iterator (start from beginning) */
+    GtkTextTag      *tag;
+    guint            idle_id;      /* g_idle_add id, 0 if none */
+    gboolean         cancelled;    /* set when canceled */
+} SearchRun;
+
 //Function Prototype
 /*------------------------------------------------------------------------------*/
 /*
@@ -76,7 +87,7 @@ static void load_css_for_wideget(GtkWidget *, const char *);
     @brief: Checks weather there is data and search and highlights it.
     @param: The text buffer itself
 */
-static GtkTextTag* ensure_search_tag(GtkTextBuffer *buffer);
+GtkTextTag* ensure_search_tag(GtkTextBuffer *buffer);
 /*
     @brief: Intialises the menu bar
     @param: The master menu widget. 

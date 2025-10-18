@@ -57,6 +57,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "process.h"
 #include "overlays.h"
 #include "menu_bar.h"
+#include "search_replace.h"
 /********************************************************************* */
 
 /********************************************************************* */

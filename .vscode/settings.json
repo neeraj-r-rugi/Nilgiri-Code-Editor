@@ -3,6 +3,7 @@
     "C_Cpp.default.compilerPath": "/usr/bin/gcc",
     "files.associations": {
         "gtksourcesearchcontext.h": "c",
-        "defines.h": "c"
+        "defines.h": "c",
+        "search_replace.h": "c"
     }
 }
