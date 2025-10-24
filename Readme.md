@@ -141,6 +141,7 @@ The editor is structured with modular components:
 - `process.c`: Keyboard event handling
 - `menu_bar.c`: Menu system implementation
 - `overlays.c`: UI overlay management
+- `search_replace.c`: Implementation for search and replace features(WiP)
 
 ### System Requirements
 - GTK+ 3.0 or higher
