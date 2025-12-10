@@ -172,7 +172,10 @@ The editor is structured with modular components:
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the GNU GPL V3 License - see the [LICENSE](LICENSE) file for details.
+<b><u><span style="color:red">NOTE: THE LICENSE HAS CHANGED...</span></u></b>
+
+
 
 ## Support
 
